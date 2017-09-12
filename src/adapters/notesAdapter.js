@@ -19,6 +19,10 @@ class NotesAdapter {
   // }
 
   createNote(noteInfo) {
+    
+
+    //------ modify noteinfo to match snakecase required by notes controller
+
     const noteCreateParams = {
       method: 'POST',
       headers: {

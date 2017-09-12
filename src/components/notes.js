@@ -35,11 +35,12 @@ class Notes {
     const location = this.noteLocation.value;
     // add userId later
 
+    // use camelcase here nad convert to snake case in adapter
     const noteInfo = {
       title: title,
       body: body,
-      estHours: estHours,
-      dueDate: dueDate,
+      est_hours: estHours,
+      due_date: dueDate,
       location: location 
     };
     
