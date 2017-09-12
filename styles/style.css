@@ -28,6 +28,17 @@ ul {
   padding-left: 20px;
 }
 
+li {
+  display: inline;
+}
+
 .delete-note-link {
   color:red;
+}
+
+.note {
+  background-color: white;
+  width: 500px;
+  margin: 15px;
+  padding: 15px;
 }

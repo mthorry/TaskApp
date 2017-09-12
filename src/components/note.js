@@ -14,13 +14,15 @@ class Note {
   }
 
   render() {
-    return `<li data-noteid='${this.id}' data-props='${JSON.stringify(this)}' class='note-element'>
+    return `
+    <div id="note-${this.id}" class="note">
+    <li data-noteid='${this.id}' data-props='${JSON.stringify(this)}' class='note-element'>
     <h3>${this.title}</h3>
-    ${this.body}<br>
-    Due at: ${new Date(this.dueDate)}<br>
-
-
-    <i data-action='delete-note' class="em em-scream_cat"></i>
-    </li>`;
+    <em>${this.body}</em><br>
+    <strong>Due at:</strong> ${new Date(this.dueDate)}<br>
+    <strong>Time Needed:</strong> ${this.estHours} hours<br>
+    <strong>Location:</strong> ${this.location}<br>
+    </li>
+    </div>`;
   }
 }
