@@ -8,7 +8,12 @@ class Notes {
 
   initBindingsAndEventListeners() {
     this.notesForm = document.getElementById('new-note-form')
-    this.noteInput = document.getElementById('new-note-body')
+    this.noteTitle = document.getElementById('new-note-title')
+    this.noteBody = document.getElementById('new-note-body')
+    this.noteEstHours = document.getElementById('new-note-est-hours')
+    this.noteDueDate = document.getElementById('new-note-due-date') 
+    this.noteLocation = document.getElementById('new-note-location')
+
     this.notesNode = document.getElementById('notes-container')
     this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
     this.notesNode.addEventListener('click',this.handleDeleteNote.bind(this))
@@ -23,11 +28,31 @@ class Notes {
 
   handleAddNote() {
     event.preventDefault()
-    const body = this.noteInput.value
-    this.adapter.createNote(body)
+    const title = this.noteTitle.value;
+    const body = this.noteBody.value;
+    const estHours = this.noteEstHours.value;
+    const dueDate = this.noteDueDate.value; // new Date(dueDate)
+    const location = this.noteLocation.value;
+    // add userId later
+
+    const noteInfo = {
+      title: title,
+      body: body,
+      estHours: estHours,
+      dueDate: dueDate,
+      location: location 
+    };
+    
+    this.adapter.createNote(noteInfo)
     .then( (noteJSON) => this.notes.push(new Note(noteJSON)) )
     .then(  this.render.bind(this) )
-    .then( () => this.noteInput.value = '' )
+    .then( () => this.noteTitle.value = '', 
+      this.noteBody.value = '',
+      this.noteBody.value = '',
+      this.noteEstHours.value = '',
+      this.noteDueDate.value = '',
+      this.noteLocation.value = '')
+      
   }
 
   handleDeleteNote() {
