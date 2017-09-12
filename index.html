@@ -8,12 +8,27 @@
   <body>
     <div class="container">
       <div id="new-note-container">
+        <h3>Add a new note</h3>
         <form id="new-note-form">
-          <input type="text" name="note-body" id="new-note-body">
+          <label>Title: </label>
+          <input type="text" name="note-title" id="new-note-title"><br>
+          
+          <label>Body: </label>
+          <input type="text" name="note-body" id="new-note-body"><br>
+          <label>Estimated number of hours: </label>
+          <input type="number" name="note-est-hours" id="new-note-est-hours"><br>
+          <label>Due Date: </label>
+          <input type="datetime-local" name="note-due-date" id="new-note-due-date"><br>
+          <label>Location: </label>
+          <input type="text" name="note-location" id="new-note-location"><br>
+          <!-- tags, collaberators -->
+          <!-- for completion form: actual_hours, time_completed -->
           <input type="submit" value="Save note">
         </form>
       </div>
+      <h3>Your notes</h3>
       <div id="notes-container">
+
 
       </div>
     </div>

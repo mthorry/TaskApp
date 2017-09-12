@@ -5,9 +5,13 @@ body {
    font-size: 1.3em;
 }
 
+h3 {
+  color: #098762;
+}
+
 a {
-    color:#97659;
-   }
+    color:#9765f9;
+}
 
 input {
   font-size: 1.5em;
