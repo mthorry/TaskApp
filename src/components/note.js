@@ -15,14 +15,16 @@ class Note {
 // data-props='${JSON.stringify(this)}'
   render() {
     return `
-    <div id="note-${this.id}" class="note">
-    <li data-noteid='${this.id}' class='note-element'>
-    <h3>${this.title}</h3>
-    <em>${this.body}</em><br>
-    <strong>Due at:</strong> ${new Date(this.dueDate)}<br>
-    <strong>Time Needed:</strong> ${this.estHours} hours<br>
-    <strong>Location:</strong> ${this.location}<br>
-    </li>
+    <div id="note-${this.id}" class="note card">
+      <div data-noteid='${this.id}' class='note-element content'>
+      <h3 class="header">${this.title}</h3>
+        <div class="description">
+          <em>${this.body}</em><br>
+          <strong>Due at:</strong> ${new Date(this.dueDate)}<br>
+          <strong>Time Needed:</strong> ${this.estHours} hours<br>
+          <strong>Location:</strong> ${this.location}<br>
+        </div>
+      </div>
     </div>`;
   }
 }

@@ -39,7 +39,7 @@ class ListsAdapter {
 	      body: JSON.stringify(convertedNoteInfo)
 	    }
 
-	    const listUrl = this.baseUrl += `/${noteInfo["listId"]}`
+	    const listUrl = this.baseUrl + `/${noteInfo["listId"]}`
 
 	    return fetch(listUrl, noteCreateParams).then(resp => resp.json())
 	}
