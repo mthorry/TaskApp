@@ -17,6 +17,7 @@ class Lists {
 	    this.noteEstHours = document.getElementById('new-note-est-hours')
 	    this.noteDueDate = document.getElementById('new-note-due-date') 
 	    this.noteLocation = document.getElementById('new-note-location')
+	    this.noteListId = document.getElementById('new-note-list-selector')
 	    this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
 
 // list creation form elements and event listener
@@ -60,13 +61,12 @@ class Lists {
 
 	handleAddNote() {
 	    event.preventDefault()
-	    debugger
 	    const title = this.noteTitle.value;
 	    const body = this.noteBody.value;
 	    const estHours = this.noteEstHours.value;
 	    const dueDate = this.noteDueDate.value; // new Date(dueDate)
 	    const location = this.noteLocation.value;
-	    const listId = this.id;
+	    const listId = this.noteListId.value;
 	    // add userId later
 
 	    // use camelcase here nad convert to snake case in adapter
@@ -80,7 +80,7 @@ class Lists {
 	    };
 	    
 	    this.adapter.createNote(noteInfo)
-	    .then( function(noteJSON) {
+	    .then( (noteJSON) => {
 // need to make sure adding to correct list
 	    	this.lists[0].notes.push(new Note(noteJSON))
 	    })

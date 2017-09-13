@@ -40,14 +40,20 @@ li {
 
 .note {
   background-color: white;
-  width: 500px;
+  width: 300px;
+  margin: 15px;
+  padding: 15px;
+}
+
+.list-container {
+  background-color: orange;
   margin: 15px;
   padding: 15px;
 }
 
 #lists-container {
   background-color: maroon;
-  width: 300px;
+  width: 800px;
   margin: 15px;
   padding: 15px;
 

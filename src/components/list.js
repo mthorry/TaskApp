@@ -18,7 +18,7 @@ class List {
   }
 
   render() {
-    return `<ul>${this.notesHTML()}</ul>`
+    return `<div class="list-container"><h2>${this.title}</h2><ul>${this.notesHTML()}</ul></div>`
   }
 
   initBindingsAndEventListeners() {

@@ -32,14 +32,16 @@ class ListsAdapter {
 	    }
 
 	    const noteCreateParams = {
-	      method: 'POST',
+	      method: 'PATCH',
 	      headers: {
 	        'Content-Type':'application/json'
 	      },
 	      body: JSON.stringify(convertedNoteInfo)
 	    }
 
-	    return fetch(this.baseUrl, noteCreateParams).then(resp => resp.json())
+	    const listUrl = this.baseUrl += `/${noteInfo["listId"]}`
+
+	    return fetch(listUrl, noteCreateParams).then(resp => resp.json())
 	}
 	
 }
