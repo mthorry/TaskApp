@@ -7,30 +7,37 @@ class List {
     
     this.initBindingsAndEventListeners()
     this.adapter = new ListAdapter()
-    this.fetchAndLoadNotes()
+    // this.fetchAndLoadNotes()
   }
 
   initBindingsAndEventListeners() {
     // some of this should move up in the chain to lists.js
     // but what??????
-    this.notesForm = document.getElementById('new-note-form')
-    this.noteTitle = document.getElementById('new-note-title')
-    this.noteBody = document.getElementById('new-note-body')
-    this.noteEstHours = document.getElementById('new-note-est-hours')
-    this.noteDueDate = document.getElementById('new-note-due-date') 
-    this.noteLocation = document.getElementById('new-note-location')
+    // this.notesForm = document.getElementById('new-note-form')
+    // this.noteTitle = document.getElementById('new-note-title')
+    // this.noteBody = document.getElementById('new-note-body')
+    // this.noteEstHours = document.getElementById('new-note-est-hours')
+    // this.noteDueDate = document.getElementById('new-note-due-date') 
+    // this.noteLocation = document.getElementById('new-note-location')
 
-    this.notesNode = document.getElementById('notes-container')
-    this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
-    this.notesNode.addEventListener('click',this.handleDeleteNote.bind(this))
+    // this.notesNode = document.getElementById('notes-container')
+    // this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
+    // this.notesNode.addEventListener('click',this.handleDeleteNote.bind(this))
   }
 
-  fetchAndLoadNotes() {
-    this.adapter.getNotes()
-    .then( notesJSON => notesJSON.forEach( note => this.notes.push( new Note(note) )))
-      .then( this.render.bind(this) )
-      .catch( () => alert('The server does not appear to be running') )
-  }
+  // fetchAndLoadNotes() {
+  //   this.adapter.getNotes()
+  //   .then( notesJSON => notesJSON.forEach((note) => {
+  //   // debugger
+        
+  //     if (this.id === note.list.id) {
+  //       this.notes.push( new Note(note) )
+  //     }
+    
+  //   }))
+  //   .then( this.render.bind(this) )
+  //   .catch( () => alert('The server does not appear to be running') )
+  // }
 
   handleAddNote() {
     event.preventDefault()
@@ -82,6 +89,6 @@ class List {
   }
 
   render() {
-    this.notesNode.innerHTML = `<ul>${this.notesHTML()}</ul>`
+    return `<ul>${this.notesHTML()}</ul>`
   }
 }

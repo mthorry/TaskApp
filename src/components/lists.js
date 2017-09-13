@@ -33,9 +33,9 @@ class Lists {
 
 	fetchAndLoadLists() {
 		this.adapter.getLists()
-    	.then( listsJSON => listsJSON.forEach( note => this.lists.push( new List(list) )))
+    	.then( listsJSON => listsJSON.forEach( list => this.lists.push( new List(list) )))
       	.then( this.render.bind(this) )
-      	.catch( () => alert('The server does not appear to be running') )
+      	.catch( (error) => console.log(error) )
 	}
 
 	handleAddList() {
@@ -55,6 +55,40 @@ class Lists {
 
 	handleDeleteList() {
 
+	}
+
+
+	handleAddNote() {
+	    event.preventDefault()
+	    debugger
+	    const title = this.noteTitle.value;
+	    const body = this.noteBody.value;
+	    const estHours = this.noteEstHours.value;
+	    const dueDate = this.noteDueDate.value; // new Date(dueDate)
+	    const location = this.noteLocation.value;
+	    const listId = this.id;
+	    // add userId later
+
+	    // use camelcase here nad convert to snake case in adapter
+	    const noteInfo = {
+	      title: title,
+	      body: body,
+	      estHours: estHours,
+	      dueDate: dueDate,
+	      location: location,
+	      listId: listId
+	    };
+	    
+	    this.adapter.createNote(noteInfo)
+	    .then( (noteJSON) => this.lists[0].notes.push(new Note(noteJSON)) )
+	    .then(  this.render.bind(this) )
+	    .then( () => this.noteTitle.value = '', 
+	      this.noteBody.value = '',
+	      this.noteBody.value = '',
+	      this.noteEstHours.value = '',
+	      this.noteDueDate.value = '',
+	      this.noteLocation.value = '')
+	      
 	}
 
 

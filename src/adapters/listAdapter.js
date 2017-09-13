@@ -19,7 +19,7 @@ class ListAdapter {
     }
 
     const noteCreateParams = {
-      method: 'POST',
+      method: 'POST', // this will be a patch request
       headers: {
         'Content-Type':'application/json'
       },
