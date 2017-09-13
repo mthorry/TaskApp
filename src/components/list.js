@@ -1,12 +1,18 @@
-class Notes {
+class List {
   constructor() {
     this.notes = []
+
+    //---------------------placeholder
+    this.id = 1
+    
     this.initBindingsAndEventListeners()
-    this.adapter = new NotesAdapter()
+    this.adapter = new ListAdapter()
     this.fetchAndLoadNotes()
   }
 
   initBindingsAndEventListeners() {
+    // some of this should move up in the chain to lists.js
+    // but what??????
     this.notesForm = document.getElementById('new-note-form')
     this.noteTitle = document.getElementById('new-note-title')
     this.noteBody = document.getElementById('new-note-body')
@@ -33,15 +39,17 @@ class Notes {
     const estHours = this.noteEstHours.value;
     const dueDate = this.noteDueDate.value; // new Date(dueDate)
     const location = this.noteLocation.value;
+    const listId = this.id;
     // add userId later
 
     // use camelcase here nad convert to snake case in adapter
     const noteInfo = {
       title: title,
       body: body,
-      est_hours: estHours,
-      due_date: dueDate,
-      location: location 
+      estHours: estHours,
+      dueDate: dueDate,
+      location: location,
+      listId: listId
     };
     
     this.adapter.createNote(noteInfo)

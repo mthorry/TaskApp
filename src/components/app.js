@@ -1,5 +1,6 @@
 class App {
   constructor() {
-    this.notes = new Notes()
+    this.list = new List() // replace
+    // this.lists = new Lists()
   }
 }
