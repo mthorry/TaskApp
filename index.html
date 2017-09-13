@@ -7,6 +7,16 @@
   </head>
   <body>
     <div class="container">
+
+      <div id="new-list-container">
+        <h3>Create a new list</h3>
+        <form id="new-list-form">
+          <label>Title: </label>
+          <input type="text" name="list-title" id="new-list-title"><br>
+          <input type="submit" value="Create List">
+        </form>
+      </div>  
+
       <div id="new-note-container">
         <h3>Add a new note</h3>
         <form id="new-note-form">
@@ -21,16 +31,30 @@
           <input type="datetime-local" name="note-due-date" id="new-note-due-date"><br>
           <label>Location: </label>
           <input type="text" name="note-location" id="new-note-location"><br>
+          <label>Select a List</label>
+          <select id="new-note-list-selector"> 
+          <option>1</option>
+          <!-- need to populate -->
+
+          </select>
           <!-- tags, collaberators -->
           <!-- for completion form: actual_hours, time_completed -->
           <input type="submit" value="Save note">
         </form>
       </div>
+
+      <h3>Your Lists</h3>
+      <div id="lists-container">
+        
+      </div>
+      
+      <!-- to be replaced by lists container -->
       <h3>Your notes</h3>
       <div id="notes-container">
-
-
       </div>
+
+      
+    
     </div>
 
     <script type="text/javascript" src="src/components/note.js"></script>

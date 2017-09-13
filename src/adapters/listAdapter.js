@@ -7,17 +7,6 @@ class ListAdapter {
     return fetch(this.baseUrl).then(response => response.json())
   }
 
-  // deleteNote(noteId) {
-  //   const deleteUrl = `${this.baseUrl}/${noteId}`
-  //   const noteDeleteParams = {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type':'application/json'
-  //     }
-  //   }
-  //   return fetch(deleteUrl, noteDeleteParams).then(response => response.json())
-  // }
-
   createNote(noteInfo) {
 
     const convertedNoteInfo = {
@@ -39,5 +28,16 @@ class ListAdapter {
 
     return fetch(this.baseUrl, noteCreateParams).then(resp => resp.json())
   }
+
+  // deleteNote(noteId) {
+  //   const deleteUrl = `${this.baseUrl}/${noteId}`
+  //   const noteDeleteParams = {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type':'application/json'
+  //     }
+  //   }
+  //   return fetch(deleteUrl, noteDeleteParams).then(response => response.json())
+  // }
 
 }
