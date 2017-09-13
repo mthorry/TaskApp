@@ -80,7 +80,10 @@ class Lists {
 	    };
 	    
 	    this.adapter.createNote(noteInfo)
-	    .then( (noteJSON) => this.lists[0].notes.push(new Note(noteJSON)) )
+	    .then( function(noteJSON) {
+// need to make sure adding to correct list
+	    	this.lists[0].notes.push(new Note(noteJSON))
+	    })
 	    .then(  this.render.bind(this) )
 	    .then( () => this.noteTitle.value = '', 
 	      this.noteBody.value = '',
@@ -91,6 +94,19 @@ class Lists {
 	      
 	}
 
+// 'THIS' MAY BE OFF IN NOTE HANDLER FUNCTIONS
+	  // handleDeleteNote() {
+	  //   if (event.target.dataset.action === 'delete-note' && event.target.parentElement.classList.contains("note-element")) {
+	  //     const noteId = event.target.parentElement.dataset.noteid
+	  //     this.adapter.deleteNote(noteId)
+	  //     .then( resp => this.removeDeletedNote(resp) )
+	  //   }
+	  // }
+
+	  // removeDeletedNote(deleteResponse) {
+	  //   this.notes = this.notes.filter( note => note.id !== deleteResponse.noteId )
+	  //   this.render()
+	  // }
 
 
 	// THIS IS TO POPULATE HTML SELECTOR

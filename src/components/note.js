@@ -14,7 +14,6 @@ class Note {
 
 // data-props='${JSON.stringify(this)}'
   render() {
-
     return `
     <div id="note-${this.id}" class="note">
     <li data-noteid='${this.id}' class='note-element'>
