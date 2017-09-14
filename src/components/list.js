@@ -23,11 +23,14 @@ class List {
 //------------ order by completion
 //------------ order by est hours
 
-    return `<div class="list-container ui cards card">
-      <h2>${this.title}</h2>
-      <button class="delete-list-button ui negative basic button" data-listid="${this.id}">Delete List</button>
+    return `<div class="list-container ui card">
+      <h2 class="center aligned segment">${this.title}
+      <button class="delete-list-button circular ui basic icon button" data-listid="${this.id}"><i class="trash outline icon center aligned segment"></i></button></h2>
+      <div class="ui divider"></div><div class="ui divider"></div>
+
       <div>${this.notesHTML()}</div>
       </div>`;
+
   }
 
 }

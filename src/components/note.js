@@ -1,15 +1,15 @@
 class Note {
   constructor(noteJSON) {
-  	// needs adding to 
+  	// needs adding to
 
-    // converting out of snake case to camel case 
+    // converting out of snake case to camel case
   	this.title = noteJSON.title
     this.body = noteJSON.body
     this.estHours = noteJSON.est_hours
     this.location = noteJSON.location
     this.dueDate = noteJSON.due_date
     this.id = noteJSON.id
-    
+
     // this.listId = noteJSON.list_id
   }
 
@@ -22,17 +22,18 @@ class Note {
       <div data-noteid='${this.id}' data-listid='${this.listId}' class='note-element content'>
         <h3 class="header">${this.title}</h3>
         <div class="description">
-          <em>${this.body}</em><br>
-          <strong>Due at:</strong> ${new Date(this.dueDate)}<br>
-          <strong>Time Needed:</strong> ${this.estHours} hours<br>
-          <strong>Location:</strong> ${this.location}<br>
+          ${this.body}<br>
+          Due at: ${new Date(this.dueDate)}<br>
+          Time Needed: ${this.estHours} hours<br>
+          Location: ${this.location}<br>
         </div>
         <div class="extra content">
-          <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui negative mini basic button">Delete</button>
-          <button data-noteid='${this.id}' data-listid='${this.listId}' class="complete-note-button ui positive basic button">Mark Complete</button>
-          <button data-noteid='${this.id}' data-listid='${this.listId}' class="edit-note-button ui yellow mini basic button">Edit</button>
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui inverted mini button red">Delete</button>
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="complete-note-button ui inverted button green">Mark Complete</button>
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="edit-note-button ui inverted mini button yellow">Edit</button>
         </div>
       </div>
-    </div>`;
+    </div><div class="ui divider"></div>
+`;
   }
 }
