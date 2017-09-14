@@ -163,9 +163,15 @@ class Lists {
 	}
 
 	updateCompletedNote(completeResponse) {
+
+		// completeResponse is a note-like object
+
 		debugger
+		
 		// find the note
 		// render as completed (move / different color?)
+
+
 	}
 
 
