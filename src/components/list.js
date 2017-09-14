@@ -18,7 +18,12 @@ class List {
   }
 
   render() {
-    return `<div class="list-container">
+
+//------------ order by due date
+//------------ order by completion
+//------------ order by est hours
+
+    return `<div class="list-container ui cards card">
       <h2>${this.title}</h2>
       <button class="delete-list-button ui negative basic button" data-listid="${this.id}">Delete List</button>
       <div>${this.notesHTML()}</div>

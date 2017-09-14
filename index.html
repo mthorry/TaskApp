@@ -10,41 +10,49 @@
     <div class="ui container">
       <div class="ui grid">
 
-      <div id="new-list-container" class="six wide column">
-        <h1>Create a new list</h1>
-        <form id="new-list-form">
-          <label>Title: </label>
-          <input type="text" name="list-title" id="new-list-title"><br>
-          <input type="submit" value="Create List" class="ui positive button">
-        </form>
-        <br>
-      </div>
+        <div id="new-list-container" class="four wide column">
+          <h1>Create a new list</h1>
+          <form id="new-list-form">
+            <label>Title: </label>
+            <input type="text" name="list-title" id="new-list-title"><br>
+            <input type="submit" value="Create List" class="ui positive button">
+          </form>
+          <br>
+        </div>
 
-      <div id="new-note-container" class="six wide column">
-        <h1>Add a new note</h1>
-        <form id="new-note-form">
-          <label>Title: </label>
-          <input type="text" name="note-title" id="new-note-title"><br>
+        <div id="new-note-container" class="six wide column">
+          <h1>Add a new note</h1>
+          <form id="new-note-form">
+            <label>Title: </label>
+            <input type="text" name="note-title" id="new-note-title"><br>
 
-          <label>Body: </label>
-          <input type="text" name="note-body" id="new-note-body"><br>
-          <label>Estimated number of hours: </label>
-          <input type="number" name="note-est-hours" id="new-note-est-hours"><br>
-          <label>Due Date: </label>
-          <input type="datetime-local" name="note-due-date" id="new-note-due-date"><br>
-          <label>Location: </label>
-          <input type="text" name="note-location" id="new-note-location"><br>
-          <label>Select a List</label>
-          <select id="new-note-list-selector" class="ui selection dropdown">
-          <option value="1">1</option>
-          <!-- need to populate -->
+            <label>Body: </label>
+            <input type="text" name="note-body" id="new-note-body"><br>
+            <label>Estimated number of hours: </label>
+            <input type="number" name="note-est-hours" id="new-note-est-hours"><br>
+            <label>Due Date: </label>
+            <input type="datetime-local" name="note-due-date" id="new-note-due-date"><br>
+            <label>Location: </label>
+            <input type="text" name="note-location" id="new-note-location"><br>
+            <label>Select a List</label>
+            <select id="new-note-list-selector" class="ui selection dropdown">
+            <option value="1">1</option>
+            <!-- need to populate -->
 
-          </select>
-          <!-- tags, collaberators -->
-          <!-- for completion form: actual_hours, time_completed -->
-          <input type="submit" value="Save note" class="ui positive button">
-        </form>
-      </div>
+            </select>
+            <!-- tags, collaberators -->
+            <!-- for completion form: actual_hours, time_completed -->
+            <input type="submit" value="Save note" class="ui positive button">
+          </form>
+        </div>
+
+        <div id="filter-container" class="two wide column">
+          <h1>Search</h1>
+          <form id="filter-form">
+            <input type="text" id="filter-input">
+            <input type="submit" id="filter-submit-button" value="Search" class="ui positive button">
+          </form> 
+        </div>
       </div>
 
       <div class="wrapper ui container">

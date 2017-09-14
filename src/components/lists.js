@@ -31,7 +31,13 @@ class Lists {
 
 // event listener for note delete - just listen to whole lists containr 
 // and check for targets class = 'delete-note-button'
-		this.listsNode.addEventListener('click', this.handleDeleteNote.bind(this))
+		this.listsNode.addEventListener('click', this.handleListsNodeButtons.bind(this))
+
+// elements and event listener for filter form
+		//this.filterForm = document.getElementById('filter-form')
+		this.filterInput = document.getElementById('filter-input')
+		this.filterInput.addEventListener('keyup', this.handleFilter)
+		//this.filterForm.addEventListener('submit')
 
 	}
 
@@ -57,8 +63,19 @@ class Lists {
 		.then(this.populateListSelector.bind(this))
 	}
 
-	handleDeleteList() {
+	handleFilter(event) {
 
+	}
+
+	
+
+// may have to call with bind to alleviate 'this' confusion
+	findListIndexById(id) {
+		for (var i = 0; i < this.lists.length; i++) {
+			if (this.lists[i].id === id) {
+				return i;
+			}
+		}
 	}
 
 
@@ -80,14 +97,10 @@ class Lists {
 	      location: location,
 	      listId: listId
 	    };
-	    
-
+	 
 	    this.adapter.createNote(noteInfo)
-
-// fix index/id issue
-
 	    .then( (noteJSON) => {
-	    	this.lists[noteJSON.list.id-1].notes.push(new Note(noteJSON))
+	    	this.lists[this.findListIndexById(noteJSON.list.id)].notes.push(new Note(noteJSON))
 	    })
 	    .then(  this.render.bind(this) )
 	    .then( () => this.noteTitle.value = '', 
@@ -99,32 +112,60 @@ class Lists {
 	      
 	}
 
-//RENAME TO HANDLEBUTTONFUNCTIONS?
+// nested event handlers for buttons in listsNode (aka lists-container)
+
 	handleDeleteNote(event) {
+		const noteId = event.target.dataset.noteid
+      	const listId = event.target.dataset.listid
+      	this.adapter.deleteNote(listId, noteId)
+      	.then( resp => this.removeDeletedNote(resp) )
+	}
+
+	handleDeleteList(event) {
+		const listId = event.target.dataset.listid
+		this.adapter.deleteList(listId)
+      	.then( resp => this.removeDeletedList(resp) )
+	}
+
+	handleCompleteNote(event) {
+		const noteId = event.target.dataset.noteid
+      	const listId = event.target.dataset.listid
+      	this.adapter.completeNote(listId, noteId)
+      	.then( resp => this.updateCompletedNote(resp) )		
+	}
+
+	handleEditNote(event) {
+
+	}
+
+//bind this?
+	handleListsNodeButtons(event) {
 	  	if (event.target.className.includes('delete-note-button')) {
-	  		const noteId = event.target.dataset.noteid
-	      	const listId = event.target.dataset.listid
-	      	this.adapter.deleteNote(listId, noteId)
-	      	.then( resp => this.removeDeletedNote(resp) )
+	  		this.handleDeleteNote(event)
 		} else if (event.target.className.includes('delete-list-button')) {
-			// delete list
-	      const listId = event.target.dataset.listid
-			this.adapter.deleteList(listId)
-	      	.then( resp => this.removeDeletedList(resp) )
-		} // edit list
+	      	this.handleDeleteList(event);
+		} else if (event.target.className.includes('complete-note-button')) { // fill in
+			this.handleCompleteNote(event)
+		}
 	}
 
 	removeDeletedList(deleteResponse) {
 // fix index/id issue
-	   let list = this.lists[deleteResponse.id-1]
+	   let list = this.lists[this.findListIndexById(deleteResponse.id)]
 	   this.lists = this.lists.filter((list) => { return list.id !== deleteResponse.id})
 	   this.render()
 	}
 
 	removeDeletedNote(deleteResponse) {
-	   let list = this.lists[deleteResponse.list.id-1]
+	   let list = this.lists[this.findListIndexById(deleteResponse.list.id)]
 	   list.notes = list.notes.filter( note => note.id !== deleteResponse.id )
 	   this.render()
+	}
+
+	updateCompletedNote(completeResponse) {
+		debugger
+		// find the note
+		// render as completed (move / different color?)
 	}
 
 

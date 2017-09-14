@@ -73,5 +73,24 @@ class ListsAdapter {
 	    }
 	    return fetch(deleteUrl, listDeleteParams).then(response => response.json())
 	}
+
+	completeNote(listId, noteId) {
+
+		const convertedNoteInfo = {
+	      time_completed: new Date(),
+	      id: noteId	
+	    }
+
+		const completeURL = `${this.notesUrl}/${noteId}`
+
+		const noteCompleteParams = {
+			method: 'PATCH',
+			headers: {
+	        	'Content-Type':'application/json'
+			},
+			body: JSON.stringify(convertedNoteInfo)
+		}
+		return fetch(completeURL, noteCompleteParams).then(response => response.json())
+	}
 	
 }

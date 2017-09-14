@@ -14,6 +14,9 @@ class Note {
   }
 
   render() {
+
+//------------ conditional for iff complete
+
     return `
     <div id="note-${this.id}" class="note card">
       <div data-noteid='${this.id}' data-listid='${this.listId}' class='note-element content'>
@@ -24,7 +27,11 @@ class Note {
           <strong>Time Needed:</strong> ${this.estHours} hours<br>
           <strong>Location:</strong> ${this.location}<br>
         </div>
-        <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui negative basic button">Delete</button>
+        <div class="extra content">
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui negative mini basic button">Delete</button>
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="complete-note-button ui positive basic button">Mark Complete</button>
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="edit-note-button ui yellow mini basic button">Edit</button>
+        </div>
       </div>
     </div>`;
   }
