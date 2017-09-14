@@ -1,6 +1,7 @@
 class ListsAdapter {
 	constructor() {
 		this.baseUrl = 'http://localhost:3000/api/v1/lists'
+		this.notesUrl = 'http://localhost:3000/api/v1/notes'
 	}
 
 	getLists() {
@@ -42,6 +43,20 @@ class ListsAdapter {
 	    const listUrl = this.baseUrl + `/${noteInfo["listId"]}`
 
 	    return fetch(listUrl, noteCreateParams).then(resp => resp.json())
+	}
+
+	deleteNote(listId, noteId) {
+// instead take in note's id and list 
+// so tha twe can go to list and update/patch it
+		
+	    const deleteUrl = `${this.notesUrl}/${noteId}` // needs to be listId not noteId
+	    const noteDeleteParams = {
+	      method: 'DELETE',
+	      headers: {
+	        'Content-Type':'application/json'
+	      }
+	    }
+	    return fetch(deleteUrl, noteDeleteParams).then(response => response.json())
 	}
 	
 }

@@ -29,15 +29,6 @@ class ListAdapter {
   //   return fetch(this.baseUrl, noteCreateParams).then(resp => resp.json())
   // }
 
-  // deleteNote(noteId) {
-  //   const deleteUrl = `${this.baseUrl}/${noteId}`
-  //   const noteDeleteParams = {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type':'application/json'
-  //     }
-  //   }
-  //   return fetch(deleteUrl, noteDeleteParams).then(response => response.json())
-  // }
+  
 
 }

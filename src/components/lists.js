@@ -2,7 +2,6 @@ class Lists {
 	constructor() {
 		this.lists = [];
 		this.initBindingsAndEventListeners();
-		// rename adapters and add note adapter
 		this.adapter = new ListsAdapter();
 		this.fetchAndLoadLists();
 	}
@@ -20,6 +19,8 @@ class Lists {
 	    this.noteListId = document.getElementById('new-note-list-selector')
 	    this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
 
+
+
 // list creation form elements and event listener
 		
 		this.listForm = document.getElementById('new-list-form')
@@ -29,6 +30,10 @@ class Lists {
 // lists node  (container) to be filled with lists
 
 		this.listsNode = document.getElementById('lists-container')
+
+// event listener for note delete - just listen to whole lists containr 
+// and check for targets class = 'delete-note-button'
+		this.listsNode.addEventListener('click', this.handleDeleteNote.bind(this))
 
 	}
 
@@ -46,12 +51,11 @@ class Lists {
 		const listInfo = {
 			title: title
 		}
-
-		// will probably need to link both adapters ere, so this will be renamed
 		this.adapter.createList(listInfo)
 		.then( (listJSON) => this.lists.push(new List(listJSON)) )
 		.then( this.render.bind(this) )
 		.then( () => this.listTitle.value = "" )
+		.then(populateListSelector)
 	}
 
 	handleDeleteList() {
@@ -69,7 +73,6 @@ class Lists {
 	    const listId = this.noteListId.value;
 	    // add userId later
 
-	    // use camelcase here nad convert to snake case in adapter
 	    const noteInfo = {
 	      title: title,
 	      body: body,
@@ -81,8 +84,7 @@ class Lists {
 	    
 	    this.adapter.createNote(noteInfo)
 	    .then( (noteJSON) => {
-// need to make sure adding to correct list
-	    	this.lists[0].notes.push(new Note(noteJSON))
+	    	this.lists[noteJSON.list.id-1].notes.push(new Note(noteJSON))
 	    })
 	    .then(  this.render.bind(this) )
 	    .then( () => this.noteTitle.value = '', 
@@ -95,23 +97,36 @@ class Lists {
 	}
 
 // 'THIS' MAY BE OFF IN NOTE HANDLER FUNCTIONS
-	  // handleDeleteNote() {
-	  //   if (event.target.dataset.action === 'delete-note' && event.target.parentElement.classList.contains("note-element")) {
-	  //     const noteId = event.target.parentElement.dataset.noteid
-	  //     this.adapter.deleteNote(noteId)
-	  //     .then( resp => this.removeDeletedNote(resp) )
-	  //   }
-	  // }
+	handleDeleteNote(event) {
 
-	  // removeDeletedNote(deleteResponse) {
-	  //   this.notes = this.notes.filter( note => note.id !== deleteResponse.noteId )
-	  //   this.render()
-	  // }
+	  	if (event.target.className === 'delete-note-button') {
+	  		const noteId = event.target.dataset.noteid
+	      	const listId = event.target.dataset.listid
+
+	      	this.adapter.deleteNote(listId, noteId)
+	      	.then( resp => this.removeDeletedNote(resp) )
+
+		}
+	    
+	}
+
+	  removeDeletedNote(deleteResponse) {
+	  	let list = this.lists[deleteResponse.list.id-1]
+	    list.notes = list.notes.filter( note => note.id !== deleteResponse.id )
+	    this.render()
+	  }
 
 
-	// THIS IS TO POPULATE HTML SELECTOR
 	populateListSelector() {
-		// <option value="INTERPOLATE LIST ID"> INTERPOLATE LIST NAME</option>
+// reset selecotr options
+		this.noteListId.innerHTML = ""
+// populate selector
+		this.lists.forEach((list) => {
+			let option = document.createElement('option');
+			option.value = list.id;
+			option.innerText = list.title;
+			this.noteListId.appendChild(option);
+		})
 	}
 
 
@@ -125,6 +140,7 @@ class Lists {
 	}
 
 	render() {
+		this.populateListSelector();
 		this.listsNode.innerHTML = `${this.listsHTML()}`
 	}
 }
