@@ -9,13 +9,17 @@ class ListsAdapter {
 	}
 
 	createList(listInfo) {
+		const convertedListInfo = {
+			title: listInfo.title,
+			user_id: listInfo.userId
+		}
 		
 		const listCreateParams = {
 			method: 'POST',
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify(listInfo)
+			body: JSON.stringify(convertedListInfo)
 		}
 
 		return fetch(this.baseUrl, listCreateParams).then(resp => resp.json()) 
@@ -57,6 +61,17 @@ class ListsAdapter {
 	      }
 	    }
 	    return fetch(deleteUrl, noteDeleteParams).then(response => response.json())
+	}
+
+	deleteList(listId) {
+		const deleteUrl = `${this.baseUrl}/${listId}`
+		const listDeleteParams = {
+	      method: 'DELETE',
+	      headers: {
+	        'Content-Type':'application/json'
+	      }
+	    }
+	    return fetch(deleteUrl, listDeleteParams).then(response => response.json())
 	}
 	
 }

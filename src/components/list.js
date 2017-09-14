@@ -18,7 +18,11 @@ class List {
   }
 
   render() {
-    return `<div class="list-container"><h2>${this.title}</h2><ul>${this.notesHTML()}</ul></div>`
+    return `<div class="list-container">
+      <h2>${this.title}</h2>
+      <button class="delete-list-button ui negative basic button" data-listid="${this.id}">Delete List</button>
+      <ul>${this.notesHTML()}</ul>
+      </div>`;
   }
 
 }

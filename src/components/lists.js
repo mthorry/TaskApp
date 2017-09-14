@@ -19,8 +19,6 @@ class Lists {
 	    this.noteListId = document.getElementById('new-note-list-selector')
 	    this.notesForm.addEventListener('submit',this.handleAddNote.bind(this))
 
-
-
 // list creation form elements and event listener
 		
 		this.listForm = document.getElementById('new-list-form')
@@ -49,13 +47,14 @@ class Lists {
 		const title = this.listTitle.value;
 
 		const listInfo = {
-			title: title
+			title: title,
+			userId: 1
 		}
 		this.adapter.createList(listInfo)
 		.then( (listJSON) => this.lists.push(new List(listJSON)) )
 		.then( this.render.bind(this) )
 		.then( () => this.listTitle.value = "" )
-		.then(populateListSelector)
+		.then(this.populateListSelector.bind(this))
 	}
 
 	handleDeleteList() {
@@ -82,7 +81,11 @@ class Lists {
 	      listId: listId
 	    };
 	    
+
 	    this.adapter.createNote(noteInfo)
+
+// fix index/id issue
+
 	    .then( (noteJSON) => {
 	    	this.lists[noteJSON.list.id-1].notes.push(new Note(noteJSON))
 	    })
@@ -96,25 +99,33 @@ class Lists {
 	      
 	}
 
-// 'THIS' MAY BE OFF IN NOTE HANDLER FUNCTIONS
+//RENAME TO HANDLEBUTTONFUNCTIONS?
 	handleDeleteNote(event) {
-
-	  	if (event.target.className === 'delete-note-button') {
+	  	if (event.target.className.includes('delete-note-button')) {
 	  		const noteId = event.target.dataset.noteid
 	      	const listId = event.target.dataset.listid
-
 	      	this.adapter.deleteNote(listId, noteId)
 	      	.then( resp => this.removeDeletedNote(resp) )
-
-		}
-	    
+		} else if (event.target.className.includes('delete-list-button')) {
+			// delete list
+	      const listId = event.target.dataset.listid
+			this.adapter.deleteList(listId)
+	      	.then( resp => this.removeDeletedList(resp) )
+		} // edit list
 	}
 
-	  removeDeletedNote(deleteResponse) {
-	  	let list = this.lists[deleteResponse.list.id-1]
-	    list.notes = list.notes.filter( note => note.id !== deleteResponse.id )
-	    this.render()
-	  }
+	removeDeletedList(deleteResponse) {
+// fix index/id issue
+	   let list = this.lists[deleteResponse.id-1]
+	   this.lists = this.lists.filter((list) => { return list.id !== deleteResponse.id})
+	   this.render()
+	}
+
+	removeDeletedNote(deleteResponse) {
+	   let list = this.lists[deleteResponse.list.id-1]
+	   list.notes = list.notes.filter( note => note.id !== deleteResponse.id )
+	   this.render()
+	}
 
 
 	populateListSelector() {
@@ -130,10 +141,6 @@ class Lists {
 	}
 
 
-
-	removeDeletedList(deleteResponse) {
-
-	}
 
 	listsHTML() {
 		return this.lists.map( list => list.render() ).join('')

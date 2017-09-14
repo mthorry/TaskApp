@@ -24,7 +24,7 @@ class Note {
           <strong>Time Needed:</strong> ${this.estHours} hours<br>
           <strong>Location:</strong> ${this.location}<br>
         </div>
-        <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button">Delete</button>
+        <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui negative basic button">Delete</button>
       </div>
     </div>`;
   }
