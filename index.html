@@ -7,24 +7,25 @@
     <link rel="stylesheet" type="text/css" href="styles/style.css">
   </head>
   <body>
-    <div class="container">
+    <div class="ui container">
+      <div class="ui grid">
 
-      <div id="new-list-container">
-        <h3>Create a new list</h3>
+      <div id="new-list-container" class="six wide column">
+        <h1>Create a new list</h1>
         <form id="new-list-form">
           <label>Title: </label>
           <input type="text" name="list-title" id="new-list-title"><br>
           <input type="submit" value="Create List" class="ui positive button">
         </form>
         <br>
-      </div>  
+      </div>
 
-      <div id="new-note-container">
-        <h3>Add a new note</h3>
+      <div id="new-note-container" class="six wide column">
+        <h1>Add a new note</h1>
         <form id="new-note-form">
           <label>Title: </label>
           <input type="text" name="note-title" id="new-note-title"><br>
-          
+
           <label>Body: </label>
           <input type="text" name="note-body" id="new-note-body"><br>
           <label>Estimated number of hours: </label>
@@ -34,7 +35,7 @@
           <label>Location: </label>
           <input type="text" name="note-location" id="new-note-location"><br>
           <label>Select a List</label>
-          <select id="new-note-list-selector" class="ui selection dropdown"> 
+          <select id="new-note-list-selector" class="ui selection dropdown">
           <option value="1">1</option>
           <!-- need to populate -->
 
@@ -44,13 +45,16 @@
           <input type="submit" value="Save note" class="ui positive button">
         </form>
       </div>
-
-      <h3>Your Lists</h3>
-      <div id="lists-container" class="ui cards">
-        
       </div>
-      
-    
+
+      <div class="wrapper ui container">
+      <h1>Your Lists</h1>
+      <div id="lists-container" class="ui cards">
+
+      </div>
+      </div>
+
+
     </div>
 
     <script type="text/javascript" src="src/components/note.js"></script>
@@ -61,12 +65,11 @@
 
 
     <script type="text/javascript" src="src/components/app.js"></script>
-    <script type="text/javascript" src="src/index.js">
-    </script>
+    <script type="text/javascript" src="src/index.js"></script>
     <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
   </body>
 </html>
