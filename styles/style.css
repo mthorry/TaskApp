@@ -8,6 +8,11 @@ body {
    color: #fe6814;
    background-color: #222222;
 }
+
+.complete {
+  color: grey;
+  opacity: 0.6;
+}
 /*
 h3 {
   color: #098762;

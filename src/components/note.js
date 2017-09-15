@@ -9,13 +9,29 @@ class Note {
     this.location = noteJSON.location
     this.dueDate = noteJSON.due_date
     this.id = noteJSON.id
-
+    this.timeCompleted = noteJSON.time_completed
     // this.listId = noteJSON.list_id
   }
 
   render() {
 
 //------------ conditional for iff complete
+if (this.timeCompleted) {
+      return `<div id="note-${this.id}" class="note card complete">
+      <div data-noteid='${this.id}' data-listid='${this.listId}' class='note-element content'>
+        <h3 class="header">${this.title}</h3>
+        <div class="description">
+          ${this.body}<br>
+          Completed at: ${new Date(this.timeCompleted)}<br>
+          Location: ${this.location}<br>
+        </div>
+        <div class="extra content">
+          <button data-noteid='${this.id}' data-listid='${this.listId}' class="delete-note-button ui inverted mini button red">Delete</button>
+        </div>
+      </div>
+    </div><div class="ui divider"></div>`;
+
+} else {
 
     return `
     <div id="note-${this.id}" class="note card">
@@ -34,6 +50,7 @@ class Note {
         </div>
       </div>
     </div><div class="ui divider"></div>
-`;
+    `;
+  }
   }
 }

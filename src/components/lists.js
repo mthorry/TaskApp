@@ -43,7 +43,7 @@ class Lists {
 
 	fetchAndLoadLists() {
 		this.adapter.getLists()
-    	.then( listsJSON => listsJSON.forEach( list => this.lists.push( new List(list) )))
+    	.then( listsJSON => listsJSON.forEach( list => this.lists.unshift( new List(list) )))
       	.then( this.render.bind(this) )
       	.catch( (error) => console.log(error) )
 	}
@@ -57,7 +57,7 @@ class Lists {
 			userId: 1
 		}
 		this.adapter.createList(listInfo)
-		.then( (listJSON) => this.lists.push(new List(listJSON)) )
+		.then( (listJSON) => this.lists.unshift(new List(listJSON)) )
 		.then( this.render.bind(this) )
 		.then( () => this.listTitle.value = "" )
 		.then(this.populateListSelector.bind(this))
@@ -73,7 +73,19 @@ class Lists {
 	findListIndexById(id) {
 		for (var i = 0; i < this.lists.length; i++) {
 			if (this.lists[i].id === id) {
-				return i;
+				return i; // i is the list's index in this.lists
+			}
+		}
+	}
+
+	findNoteIndexById(id) {
+		for (var i = 0; i < this.lists.length; i++) {
+			for (var j = 0; j < this.lists[i].notes.length; j++)	{
+				if (this.lists[i].notes[j].id === id) {
+
+					return j; // j is just the index of the note in its list's 'notes' array
+				
+				}
 			}
 		}
 	}
@@ -100,7 +112,7 @@ class Lists {
 	 
 	    this.adapter.createNote(noteInfo)
 	    .then( (noteJSON) => {
-	    	this.lists[this.findListIndexById(noteJSON.list.id)].notes.push(new Note(noteJSON))
+	    	this.lists[this.findListIndexById(noteJSON.list.id)].notes.unshift(new Note(noteJSON))
 	    })
 	    .then(  this.render.bind(this) )
 	    .then( () => this.noteTitle.value = '', 
@@ -165,9 +177,25 @@ class Lists {
 	updateCompletedNote(completeResponse) {
 
 		// completeResponse is a note-like object
+		// has the note's id in completeRespose.id (?)
 
-		debugger
+
+
 		
+		// get note via:
+		// this.lists[this.findListIndexById(completeResponse.list.id)].notes[this.findNoteIndexById(completeResponse.id)]
+		
+// modify the appropriate notes array using splice
+			// 	array.splice(start)
+			// 	array.splice(start, deleteCount)
+			// 	array.splice(start, deleteCount, item1, item2, ...)
+		const list = this.lists[this.findListIndexById(completeResponse.list.id)].notes
+		const note = this.lists[this.findListIndexById(completeResponse.list.id)].notes[this.findNoteIndexById(completeResponse.id)]
+		const noteId = this.findNoteIndexById(completeResponse.id)
+		list.splice(list.length-1, 0, list.splice(noteId, 1)[0])			
+
+		this.render()
+
 		// find the note
 		// render as completed (move / different color?)
 
